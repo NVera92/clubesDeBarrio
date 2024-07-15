@@ -1,0 +1,65 @@
+package com.clubesdebarrio.mdp.service;
+
+import com.clubesdebarrio.mdp.model.Club;
+import com.clubesdebarrio.mdp.repoitory.IClubRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class ClubService implements IClubService {
+
+    @Autowired
+    private IClubRepository iClubRepository;
+
+    @Override
+    public void saveClub(Club club) {
+        try{
+            iClubRepository.save(club);
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Club> getClubes() {
+        List<Club> clubList = new ArrayList<>();
+        try{
+            clubList = iClubRepository.findAll();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return clubList;
+    }
+
+    @Override
+    public Club findClub(Long id) {
+        Club club = new Club();
+        try{
+            club = iClubRepository.findById(id).orElse(null);
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return club;
+    }
+
+    @Override
+    public void editClub(Club club) {
+        try{
+            this.saveClub(club);
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteClub(Long id) {
+        try{
+            iClubRepository.deleteById(id);
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
