@@ -1,12 +1,10 @@
 package com.clubesdebarrio.mdp.controller;
 
+import com.clubesdebarrio.mdp.model.Barrio;
 import com.clubesdebarrio.mdp.model.Club;
 import com.clubesdebarrio.mdp.service.IClubService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +15,6 @@ public class ClubController {
     @Autowired
     private IClubService iClubService;
 
-    // Alta
-    @PostMapping("/club/crear")
-    public String saveClub(@RequestBody Club club){
-        String mensaje = "";
-        try{
-            iClubService.saveClub(club);
-            mensaje = "El club fue creado con exito";
-        }catch (Error e){
-            mensaje="Error al crear el club. Error: "+e.getMessage();
-        }
-        return mensaje;
-    }
 
     // Traer
     @GetMapping("/club/traer")
@@ -42,4 +28,33 @@ public class ClubController {
         return listaClubes;
     }
 
+    // Traer club por id
+    @GetMapping("/club/traer/{id}")
+    public Club getClub(@PathVariable long id){
+        return iClubService.findClub(id);
+    }
+
+    // Traer clubes por barrio
+    @GetMapping("club/traerPorBarrio/{idBarrio}")
+    public List<Club> getClubsPorBarrio(@PathVariable Long idBarrio){
+        return iClubService.getClubsByBarrio(idBarrio);
+    }
+
+    // Traer todos los clubes activos
+    @GetMapping("club/traerActivos")
+    public List<Club> getClubsByActivo(){
+        return iClubService.getClubsByActivo();
+    }
+
+    // Traer todos los clubes inactivos
+    @GetMapping("club/traerInactivos")
+    public List<Club> getClubsByInactivo(){
+        return iClubService.getClubsByInactivo();
+    }
+
+    // Traer clubes por actividad deportiva
+    @GetMapping("club/deportes/{actividad}")
+    public List<Club> getClubsByActividad(@PathVariable String actividad){
+        return iClubService.getClubsByActividad(actividad);
+    }
 }

@@ -1,5 +1,6 @@
 package com.clubesdebarrio.mdp.service;
 
+import com.clubesdebarrio.mdp.model.Barrio;
 import com.clubesdebarrio.mdp.model.Club;
 import com.clubesdebarrio.mdp.repoitory.IClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class ClubService implements IClubService {
         return clubList;
     }
 
+
     @Override
     public Club findClub(Long id) {
         Club club = new Club();
@@ -44,6 +46,53 @@ public class ClubService implements IClubService {
         }
         return club;
     }
+
+    @Override
+    public List<Club> getClubsByBarrio(Long idBarrio) {
+        List<Club> clubList = new ArrayList<>();
+        try{
+            clubList = iClubRepository.getClubsByBarrio(idBarrio);
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return clubList;
+    }
+
+    @Override
+    public List<Club> getClubsByActivo() {
+        List<Club> clubList = new ArrayList<>();
+        try{
+            clubList = iClubRepository.getClubsByActivo();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return clubList;
+    }
+
+    @Override
+    public List<Club> getClubsByInactivo() {
+        List<Club> clubList = new ArrayList<>();
+        try{
+            clubList = iClubRepository.getClubsByInactivo();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+
+        return clubList;
+    }
+
+    ///REVISAR!!
+    @Override
+    public List<Club> getClubsByActividad(String actividad) {
+        List<Club> clubList = new ArrayList<>();
+        try{
+            clubList = iClubRepository.findByDeportes(actividad);
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return  clubList;
+    }
+
 
     @Override
     public void editClub(Club club) {
