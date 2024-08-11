@@ -22,9 +22,17 @@ public interface IClubRepository extends JpaRepository<Club,Long> {
     @Query(value = "SELECT * FROM club c WHERE c.activo = 0",nativeQuery = true)
     public List<Club> getClubsByInactivo();
 
-    public final static  String  queryActividad = "SELECT * FROM club c WHERE c.deportes LIKE '%:actividad%'";
+    public final static  String  queryActividad = "SELECT * FROM club c WHERE c.deportes LIKE %:actividad%";
     @Modifying @Query(value = queryActividad ,nativeQuery = true)
     public List<Club> getClubsByActividad(@Param("actividad") String actividad);
 
-    public List<Club> findByDeportes(String deportes);
+    @Query(value = "SELECT count(*) FROM club", nativeQuery = true)
+    public Integer getCountClubs();
+
+    @Query(value = "SELECT count(*) FROM club c WHERE c.activo = 0",nativeQuery = true)
+    public Integer getCountInactiveClubs();
+
+    @Query(value = "SELECT count(*) FROM club c WHERE c.activo = 1",nativeQuery = true)
+    public Integer getCountActiveClubs();
+
 }

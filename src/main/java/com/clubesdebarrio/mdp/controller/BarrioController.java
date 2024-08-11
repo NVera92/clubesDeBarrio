@@ -32,4 +32,9 @@ public class BarrioController {
     public Barrio getBarrio(@PathVariable Long id){
         return iBarrioService.getBarrio(id);
     }
+
+    @GetMapping("barrio/totalBarrios")
+    public Integer getCountBarrios(){
+        return iBarrioService.getCountBarrios();
+    }
 }

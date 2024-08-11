@@ -62,4 +62,15 @@ public class BarrioService implements IBarrioService{
             System.out.println(e.getMessage());
         }
     }
+
+    @Override
+    public Integer getCountBarrios() {
+        Integer count = 0;
+        try{
+            count = iBarrioRepository.getCountBarrios();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
 }

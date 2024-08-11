@@ -1,7 +1,7 @@
 package com.clubesdebarrio.mdp.service;
 
-import com.clubesdebarrio.mdp.model.Barrio;
 import com.clubesdebarrio.mdp.model.Club;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 
@@ -33,5 +33,14 @@ public interface IClubService {
 
     // Baja
     public void deleteClub(Long id);
+
+    // Obtener cantidad de clubes en DDBB
+    public Integer getCountClubs();
+
+    // Obtener cantidad de clubes inactivos
+    public Integer getCountInactiveClubs();
+
+    // Obtener cantidad de clubes activos
+    public Integer getCountActiveClubs();
 
 }

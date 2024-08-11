@@ -1,6 +1,5 @@
 package com.clubesdebarrio.mdp.service;
 
-import com.clubesdebarrio.mdp.model.Barrio;
 import com.clubesdebarrio.mdp.model.Club;
 import com.clubesdebarrio.mdp.repoitory.IClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,12 +80,11 @@ public class ClubService implements IClubService {
         return clubList;
     }
 
-    ///REVISAR!!
     @Override
     public List<Club> getClubsByActividad(String actividad) {
         List<Club> clubList = new ArrayList<>();
         try{
-            clubList = iClubRepository.findByDeportes(actividad);
+            clubList = iClubRepository.getClubsByActividad(actividad);
         }catch (Error e){
             System.out.println(e.getMessage());
         }
@@ -110,5 +108,38 @@ public class ClubService implements IClubService {
         }catch (Error e){
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public Integer getCountClubs() {
+        Integer count = 0;
+        try{
+            count= iClubRepository.getCountClubs();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    @Override
+    public Integer getCountInactiveClubs() {
+        Integer count = 0;
+        try{
+            count = iClubRepository.getCountInactiveClubs();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    @Override
+    public Integer getCountActiveClubs() {
+        Integer count = 0;
+        try{
+            count = iClubRepository.getCountActiveClubs();
+        }catch (Error e){
+            System.out.println(e.getMessage());
+        }
+        return count;
     }
 }

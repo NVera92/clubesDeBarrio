@@ -21,4 +21,7 @@ public interface IBarrioService {
 
     // Baja
     public void deleteBarrio(Long id);
+
+    // Obtener conteo de barrios en DDBB
+    public Integer getCountBarrios();
 }

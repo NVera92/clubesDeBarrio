@@ -1,6 +1,5 @@
 package com.clubesdebarrio.mdp.controller;
 
-import com.clubesdebarrio.mdp.model.Barrio;
 import com.clubesdebarrio.mdp.model.Club;
 import com.clubesdebarrio.mdp.service.IClubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +56,23 @@ public class ClubController {
     public List<Club> getClubsByActividad(@PathVariable String actividad){
         return iClubService.getClubsByActividad(actividad);
     }
+
+    // Traer conteo de todos los clubes de la DDBB
+    @GetMapping("club/totalClubes")
+    public Integer getCountClubs(){
+        return iClubService.getCountClubs();
+    }
+
+    // Traer conteo de clubes inactivos
+    @GetMapping("club/totalClubesInactivos")
+    public Integer getCountInactiveClubs(){
+        return iClubService.getCountInactiveClubs();
+    }
+
+    // Traer conteo de clubes activos
+    @GetMapping("club/totalClubesActivos")
+    public Integer getCountActiveClubs(){
+        return iClubService.getCountActiveClubs();
+    }
+
 }
